@@ -1,9 +1,4 @@
 version: '3'
-
-networks:
-  my-network:
-    driver: bridge
-
 services:
   zookeeper:
     image: zookeeper:3.6.3
@@ -37,8 +32,8 @@ services:
     networks:
       - my-network
 
-  producer:
-    build: ./producer
+  producer-service:
+    build: ./producer-service
     ports:
       - "8080:8080"
     depends_on:
@@ -52,8 +47,8 @@ services:
     networks:
       - my-network
 
-  consumer:
-    build: ./consumer
+  consumer-service:
+    build: ./consumer-service
     ports:
       - "8081:8080"
     depends_on:
@@ -66,3 +61,7 @@ services:
           memory: 256M
     networks:
       - my-network
+
+networks:
+  my-network:
+    driver: bridge
